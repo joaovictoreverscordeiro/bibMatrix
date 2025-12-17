@@ -45,6 +45,86 @@ A.printElement(2, 3)
 6
 ```
 
+## `@staticmethod sum(A, B) e sub(A, B)`  
+
+Esses métodos estáticos são usados para somar/subtrair os dois parêmetros A e B, que são Matrix's. A subtração será feita da na ordem $$A - B$$.
+
+**Input**
+
+```Input
+A = Matrix([1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 3)
+B = Matrix([1, 0, 0, 0, 1, 0, 0, 0, 1], 3, 3)
+C = Matrix.sum(A, B)
+D = Matrix.sub(A, B)
+
+C.printMatrix()
+print()
+D.printMatrix()
+```
+
+**Output**
+
+```Output
+[2, 2, 3]
+[4, 6, 6]
+[7, 8, 10]
+
+[0, 2, 3]
+[4, 4, 6]
+[7, 8, 8]
+```
+
+## `multByEsc(self, a)`:
+
+Esse método multiplica o `self` por um escalar $$a$$. 
+
+**Input**
+```Input
+A = Matrix([1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 3)
+B = A.multByEsc(2)
+B.printMatrix()
+```
+
+**Output**
+```Output
+[2, 4, 6]
+[8, 10, 12]
+[14, 16, 18]
+```
+
+## `ijElementMult(self, B, i, j)`:
+
+Esse método foi criado para ser um método auxiliar na multiplicação de matrizes, mas pode ser usado como qualquer outro. Seus parâmetros são `B -> Matrix`, `(i, j) -> (linha, coluna)`. Aqui, efetuamos a multiplicação $$A\cdot B$$ e, então, obtemos o elemento localizado por `(i, j)`.
+
+Por exmemplo:
+
+$$
+C = \begin{pmatrix}
+1 & 2 & 3\\
+4 & 5 & 6\\
+7 & 8 & 9
+\end{pmatrix}\cdot\begin{pmatrix}
+1 & 2 & 3\\
+4 & 5 & 6\\
+7 & 8 & 9
+\end{pmatrix} = \begin{pmatrix}
+30 & 36 & 42\\
+66 & 81 & 96\\
+102 & 126 & 150\\
+\end{pmatrix}
+$$
+
+**Input**
+```Input
+A = Matrix([1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 3)
+print(A.ijElementMult(A, 3, 3))
+```
+
+**Output**
+```Output
+150
+```
+
 # Lista de erros
 
 **1. (ERRO 1)** Dimensão incompatível. Significa que você pode ter tentado:
