@@ -130,7 +130,7 @@ class Matrix:
         if exist == True:
             if self.n != 1:
                 for i in range(self.m):
-                    parcels.append(self.elements[self.n * i] * (-1) ** i * self.ijMatrix(i + 1, 1).det())
+                    parcels.append(self.elements[self.n * i] * (-1) ** i * self.ijsubMatrix(i + 1, 1).det())
             else:
                 parcels.append(self.elements[0])
         else:
@@ -139,7 +139,7 @@ class Matrix:
         return sum(parcels)
     
     def ijCof(self, i, j):
-        return self.ijMatrix(i, j).det() * (-1)**(i + j)
+        return self.ijsubMatrix(i, j).det() * (-1)**(i + j)
 
     def cofMatrix(self):
         cofElements = []
@@ -158,5 +158,7 @@ class Matrix:
             for j in range(self.n):
                 if abs(self.elements[i * self.n + j]) < 10 ** (-15):
                     self.elements[i * self.n + j] = 0
+                elif abs(self.elements[i * self.n + j] - 1) < 10 ** (-4):
+                    self.elements[i * self.n + j] = 1
         
         return Matrix(self.elements, self.m, self.n)
