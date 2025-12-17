@@ -125,6 +125,45 @@ print(A.ijElementMult(A, 3, 3))
 150
 ```
 
+## `mult(self, B)`:
+
+Esse método realiza a multiplicação de self por B, que também é uma matriz. 
+
+**Input**
+```Input
+A = Matrix([1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 3)
+B = A.mult(A)
+B.printMatrix()
+```
+
+**Output**
+```Output
+[30, 36, 42]
+[66, 81, 96]
+[102, 126, 150]  
+```
+
+Como a ordem importa na multiplicação de matrizes, você deve notar que `A.mult(B)` equivale a $$A\cdot B$$.
+
+## `@staticmethod identity(n)`:
+
+Esse método estático retorna a matriz identidade de ordem igual ao parâmetro $$n$$. 
+
+**Input**
+
+```Input
+A = Marix.identity(3)
+A.printMatrix()
+```
+
+**Output**
+
+```Output
+[1, 0, 0]
+[0, 1, 0]
+[0, 0, 1]
+```
+
 # Lista de erros
 
 **1. (ERRO 1)** Dimensão incompatível. Significa que você pode ter tentado:
