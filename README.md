@@ -150,19 +150,155 @@ Como a ordem importa na multiplicação de matrizes, você deve notar que `A.mul
 Esse método estático retorna a matriz identidade de ordem igual ao parâmetro $$n$$. 
 
 **Input**
-
 ```Input
 A = Marix.identity(3)
 A.printMatrix()
 ```
 
 **Output**
-
 ```Output
 [1, 0, 0]
 [0, 1, 0]
 [0, 0, 1]
 ```
+
+## `trans(self)`:
+
+Esse método retorna a matriz transposta do `self`.
+
+**Input**
+```Input
+A = Matrix([1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 3)
+B = A.trans()
+B.printMatrix()
+```
+
+**Output**
+```Output
+[1, 4, 7]
+[2, 5, 8]
+[3, 6, 9]
+```
+
+## `ijsubMatrix(self, i, j)`:
+
+Esse método foi criado como um método auxiliar para o método que calcula o determinante. Os parâmetros são `self`, `(i, j) -> (linha, coluna)`. Ele resulta na submatriz excluindo a linha e coluna do elemento `(i, j)`.
+
+**Input**
+```Input
+A = Matrix([1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 3)
+B = A.ijsubMatrix(1, 1)
+B.printMatrix()
+```
+
+**Output**
+```Output
+[5, 6]
+[8, 9]
+```
+
+A matriz resultante sempre vai ter a ordem inferior em uma unidade da original.
+
+## `det(self)`
+
+Esse método calcula o determinante do `self`.
+
+**Input**
+```Input
+A = Matrix([1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 3)
+print(A.det())
+```
+
+**Output**
+```Output
+0
+```
+
+## `ijCof(self, i, j)`
+
+Calcula o cofator do elemento localizado por `(i, j) -> (linha, coluna)`. 
+
+**Input**
+```Input
+A = Matrix([1, -1, -1, 2, 3, 8, -3, 2, 1], 3, 3)
+print(A.ijCof(2, 1))
+```
+
+**Output**
+```Output
+-1
+```
+
+## `cofMatrix(self)`
+
+Esse método retorna a matriz dos cofatores de `self`.
+
+**Input**
+```Input
+A = Matrix([1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 3)
+B = A.cofMatrix()
+B.printMatrix()
+```
+
+**Output**
+```Output
+[-3, 6, -3]
+[6, -12, 6]
+[-3, 6, -3]
+```
+
+## `inv(self)`
+
+Retorna a matriz inversa da sua matriz original. Note que ela pode estar sujeita a pequenas flutuações que podem ser resolvidas com o próximo método documentado.
+
+**Input**
+```Input
+A = Matrix([1, 8, 9, 6, 5, 10, 7, 5, 12], 3, 3)
+B = A.inv()
+B.printMatrix()
+```
+
+**Output**
+```Output
+[-0.19607843, 1, -0.68627451]
+[0.03921569, 1, -0.86274510]
+[0.09803922, -1, 0.84313725]
+```
+
+## `cleanMatrix(self)`:
+
+Se usarmos uma matriz e multiplicar pela sua inversa, obteremos uma matriz que não é a identidade.
+
+**Input**
+```Input
+A = Matrix([1, 8, 9, 6, 5, 10, 7, 5, 12], 3, 3)
+A.inv().mult(A).printMatrix()
+```
+
+**Output**
+```Output
+[1.0000000000000002, -2.220446049250313e-16, 8.881784197001252e-16]
+[1.3877787807814457e-16, 0.9999999999999993, -5.551115123125783e-16]
+[3.469446951953614e-16, 1.1102230246251565e-16, 0.9999999999999996]
+```
+
+Um resultado que, obviamente, está incorreto. Devido a pequenas instabilidades na forma com que o computador calcula os resultados numéricos, a matriz final printada está próxima, mas não é exatamente o que esperamos - uma matriz identidade de ordem 3. Para corrigir, faça:
+
+**Input**
+```Input
+A = Matrix([1, 8, 9, 6, 5, 10, 7, 5, 12], 3, 3)
+B = A.inv().mult(A).cleanMatrix()
+B.printMatrix()
+```
+
+**Output**
+```Output
+[1, 0, 0]
+[0, 1, 0]
+[0, 0, 1]
+```
+
+Esse método retorna uma matriz onde todas as entradas menores que $$10^{-15}$$ são arredondadas para $$0$$ e todas aquelas entre $$0,9999$$ e $$1$$ são arredondadas para $$1$$.
 
 # Lista de erros
 
