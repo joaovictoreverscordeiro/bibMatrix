@@ -28,31 +28,33 @@ class Matrix:
         else:
             print('\33[31mERRO 2. Elemento não encontrado.\33[m')
 
-    def sum(self, B):
-        exist = (self.m == B.m and self.n == B.n)
+    @staticmethod
+    def sum(A, B):
+        exist = (A.m == B.m and A.n == B.n)
         newElements = []
 
         if exist == True:
-            for i in range(self.m):
-                for j in range(self.n):
-                    newElements.append(self.elements[self.n * i + j] + B.elements[self.n * i + j])
+            for i in range(A.m):
+                for j in range(A.n):
+                    newElements.append(A.elements[A.n * i + j] + B.elements[A.n * i + j])
         else: 
             print('\33[31mERRO 1. Dimensão incompatível.\33[m')
 
-        return Matrix(newElements, self.m, self.n)
-    
-    def sub(self, B):
-        exist = (self.m == B.m and self.n == B.n)
+        return Matrix(newElements, A.m, A.n)
+
+    @staticmethod
+    def sub(A, B):
+        exist = (A.m == B.m and A.n == B.n)
         newElements = []
 
         if exist == True:
-            for i in range(self.m):
-                for j in range(self.n):
-                    newElements.append(self.elements[self.n * i + j] - B.elements[self.n * i + j])
+            for i in range(A.m):
+                for j in range(A.n):
+                    newElements.append(A.elements[A.n * i + j] - B.elements[A.n * i + j])
         else: 
             print('\33[31mERRO 1. Dimensão incompatível.\33[m')
 
-        return Matrix(newElements, self.m, self.n)
+        return Matrix(newElements, A.m, A.n)
     
     def multByEsc(self, a):
         newElements = []
